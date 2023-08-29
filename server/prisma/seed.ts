@@ -42,7 +42,6 @@ const userTransfer = async () => {
   return await client.$transaction(users);
 };
 
-// 定義されたデータを実際のモデルへ登録する処理
 const main = async () => {
   console.log(`Start seeding ...`);
 
@@ -51,7 +50,6 @@ const main = async () => {
   console.log(`Seeding finished.`);
 };
 
-// 処理開始
 main()
   .catch((e) => {
     console.error(e);
