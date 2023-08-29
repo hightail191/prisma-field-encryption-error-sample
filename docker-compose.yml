@@ -1,0 +1,23 @@
+version: "3"
+services:
+  db:
+    image: postgres:15.2
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_volume:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+  server:
+    build: ./server
+    command: npm start
+    volumes:
+      - ./server:/app
+    ports:
+      - "3000:3000"
+      - "5555:5555"
+    depends_on:
+      - db
+volumes:
+  postgres_volume:
