@@ -1,5 +1,6 @@
-import express from "express";
+// you can create sample data if you command "npm run seed" in terminal
 
+import express from "express";
 import { PrismaClient } from "@prisma/client";
 import { fieldEncryptionExtension } from "prisma-field-encryption";
 
@@ -13,11 +14,11 @@ const client = globalClient.$extends(
 
 const app = express();
 
-/* 2. listen()メソッドを実行して3000番ポートで待ち受け。*/
 const server = app.listen(3000, function () {
   console.log("start server");
 });
 
+// normal query
 app.get("/userposts1", async (req, res, next) => {
   const user = await client.user.findFirst();
   const authorId = user?.id || 1;
@@ -29,6 +30,7 @@ app.get("/userposts1", async (req, res, next) => {
   res.send(posts);
 });
 
+// fluent API
 app.get("/userposts2", async (req, res, next) => {
   const posts = await client.user.findFirst().posts();
   res.send(posts);
