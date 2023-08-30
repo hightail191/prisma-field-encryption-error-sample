@@ -27,11 +27,13 @@ app.get("/userposts1", async (req, res, next) => {
       authorId: authorId,
     },
   });
+  console.log(posts);
   res.send(posts);
 });
 
 // fluent API
 app.get("/userposts2", async (req, res, next) => {
   const posts = await client.user.findFirst().posts();
+  console.log(posts);
   res.send(posts);
 });
